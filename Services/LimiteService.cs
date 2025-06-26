@@ -1,7 +1,7 @@
 ﻿
 using FraudSys.DTO;
 using FraudSys.Models;
-using FraudSys.Repositories;
+using FraudSys.Repositories.Interfaces;
 using FraudSys.Validators;
 
 namespace FraudSys.Services

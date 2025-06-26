@@ -1,5 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
 using FraudSys.Models;
+using FraudSys.Repositories.Interfaces;
 using Microsoft.Extensions.Localization;
 
 namespace FraudSys.Repositories

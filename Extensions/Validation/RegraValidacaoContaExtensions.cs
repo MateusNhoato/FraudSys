@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using FraudSys.Repositories;
+using FraudSys.Repositories.Interfaces;
 
 namespace FraudSys.Extensions.Validation
 {

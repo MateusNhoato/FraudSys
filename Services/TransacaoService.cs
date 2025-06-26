@@ -1,5 +1,5 @@
 ﻿using FraudSys.DTO;
-using FraudSys.Repositories;
+using FraudSys.Repositories.Interfaces;
 using FraudSys.Services.Interfaces;
 using FraudSys.Validators;
 using Microsoft.Extensions.Options;

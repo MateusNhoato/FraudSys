@@ -1,6 +1,6 @@
 ﻿using FraudSys.Models;
 
-namespace FraudSys.Repositories
+namespace FraudSys.Repositories.Interfaces
 {
     public interface IContaRepository
     {

@@ -1,6 +1,6 @@
 ﻿namespace FraudSys.DTO
 {
-    public class TransacaoDTO
+    public class TransacaoInDTO
     {
         public string CpfContaRementente { get; set; }
         public string CpfContaDestinatario { get; set; }

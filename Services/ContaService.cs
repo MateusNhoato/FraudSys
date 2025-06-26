@@ -1,6 +1,6 @@
 ﻿using FraudSys.DTO;
 using FraudSys.Models;
-using FraudSys.Repositories;
+using FraudSys.Repositories.Interfaces;
 using FraudSys.Validators;
 
 namespace FraudSys.Services
@@ -25,7 +25,12 @@ namespace FraudSys.Services
             }
 
             var conta = await _repository.ObterAsync(atualizarSaldoDTO.Cpf);
-            AtualizarSaldoConta(conta, atualizarSaldoDTO.Valor);
+            
+            if(!AtualizarSaldoConta(conta, atualizarSaldoDTO.Valor))
+            {
+                return false;
+            }
+
             await GravarConta(conta);
             
             return true;
@@ -89,9 +94,16 @@ namespace FraudSys.Services
             };
         }
 
-        private void AtualizarSaldoConta(Conta conta, decimal valor)
+        private bool AtualizarSaldoConta(Conta conta, decimal valor)
         {
+            if (conta.Saldo - valor < 0)
+            {
+                _servicoDeMensagens.AdicionarMensagemErro("Operação inválida, não é possível negativar o saldo da conta.");
+                return false;
+            }
+
             conta.Saldo += valor;
+            return true;
         }
 
         private async Task GravarConta(Conta conta)

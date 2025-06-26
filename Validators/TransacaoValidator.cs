@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using FraudSys.DTO;
 using FraudSys.Extensions.Validation;
-using FraudSys.Repositories;
+using FraudSys.Repositories.Interfaces;
 
 namespace FraudSys.Validators
 {
