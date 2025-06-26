@@ -1,26 +1,41 @@
 ﻿using FraudSys.DTO;
+using FraudSys.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace FraudSys.Controllers
 {
-    public class LimiteController : ControllerBase
+    [ApiController]
+    [Route("[controller]")]
+    public class LimiteController : BaseController
     {
-        [HttpGet("{cpf:string}")]
-        public IActionResult Get(string cpf)
+        private readonly ILimiteService _limiteService;
+
+        public LimiteController(ServicoDeMensagens servicoDeMensagens, ILimiteService limiteService) : base(servicoDeMensagens)
         {
-            return Ok();
+            _limiteService = limiteService;
+        }
+
+
+        [HttpGet("{cpf:string}")]
+        public async Task<IActionResult> Get(string cpf)
+        {
+            var limite = await _limiteService.ObterLimite(cpf);
+            return GetBase(limite);
         }
 
         [HttpPatch]
-        public IActionResult AtualizarLimite(LimiteDTO dto)
+        public async Task<IActionResult> AtualizarLimite(LimiteDTO dto)
         {
-            return Ok();
+            var atualizou = await _limiteService.AtualizarLimite(dto);
+            return PatchBase(atualizou);
         }
 
         [HttpDelete]
-        public IActionResult Delete(string cpf)
+        public async Task<IActionResult> Delete(string cpf)
         {
-            return Ok();
+            var deletou = await _limiteService.RemoverLimite(cpf);
+            return DeleteBase(deletou);
         }
     }
 }

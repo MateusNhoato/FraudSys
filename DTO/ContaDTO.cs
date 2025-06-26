@@ -3,9 +3,9 @@
     public class ContaDTO
     {
         public string? Cpf { get; set; }
-        public int NumeroConta { get; set; }
-        public int Agencia { get; set; }
-        public decimal? LimiteTransacoesPix { get; set; }
+        public string NumeroConta { get; set; }
+        public string Agencia { get; set; }
+        public decimal LimiteTransacoesPix { get; set; }
     }
 
     public class ContaInDTO : ContaDTO

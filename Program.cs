@@ -1,6 +1,9 @@
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2;
 using FraudSys.Services;
+using FraudSys.Repositories;
+using FraudSys.Services.Interfaces;
+using FraudSys.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,12 @@ builder.Services.AddSingleton<IAmazonDynamoDB>();
 builder.Services.AddSingleton<IDynamoDBContext, DynamoDBContext>();
 
 builder.Services.AddScoped<ServicoDeMensagens>();
+builder.Services.AddScoped<IContaService, ContaService>();
+builder.Services.AddScoped<IContaRepository, ContaRepository>();
+builder.Services.AddScoped<ILimiteService, LimiteService>();
+builder.Services.AddScoped<ITransacaoService, TransacaoService>();
+builder.Services.AddScoped<IContaRepository, ContaRepository>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,14 +1,27 @@
 ﻿using FraudSys.DTO;
+using FraudSys.Services;
+using FraudSys.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FraudSys.Controllers
 {
-    public class TransacaoController : ControllerBase
+    [ApiController]
+    [Route("[controller]")]
+    public class TransacaoController : BaseController
     {
-        [HttpPost]
-        public async Task<IActionResult> Post(TransacaoDTO dto)
+        private readonly ITransacaoService _transacaoService;
+
+        public TransacaoController(ServicoDeMensagens mensagens, ITransacaoService transacaoService) : base(mensagens)
         {
-            return Ok();
+            _transacaoService = transacaoService;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(TransacaoInDTO dto)
+        {
+            var retorno = _transacaoService.EfetuarTransacao(dto);
+
+            return RetornoPadrao(retorno);
         }
     }
 }

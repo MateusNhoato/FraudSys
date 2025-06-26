@@ -1,4 +1,6 @@
-﻿namespace FraudSys.DTO
+﻿using FraudSys.Enumerators;
+
+namespace FraudSys.DTO
 {
     public class MensagemDTO
     {

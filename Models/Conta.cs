@@ -8,19 +8,19 @@ namespace FraudSys.Models
         [DynamoDBHashKey("pk")]
         public string PK => "CLIENTE#" + Cpf;
         [DynamoDBRangeKey("sk")]
-        public string SK => "CONTA#" +NumeroConta.ToString() + "-" + Agencia.ToString();
+        public string SK => "CONTA#" + NumeroConta + "-" + Agencia;
 
         [DynamoDBProperty]
         public string Cpf { get; set; }
 
         [DynamoDBProperty]
-        public int NumeroConta { get; set; }
+        public string NumeroConta { get; set; }
         [DynamoDBProperty]
-        public int Agencia { get; set; }
+        public string Agencia { get; set; }
 
         [DynamoDBProperty]
         public decimal Saldo { get; set; }
         [DynamoDBProperty]
-        public decimal? Limite { get; set; }
+        public decimal Limite { get; set; }
     }
 }

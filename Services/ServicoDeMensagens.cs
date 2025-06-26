@@ -1,4 +1,5 @@
-﻿using FraudSys.DTO;
+﻿using FluentValidation.Results;
+using FraudSys.DTO;
 using FraudSys.Enumerators;
 
 namespace FraudSys.Services
@@ -16,11 +17,27 @@ namespace FraudSys.Services
 
         public  void AdicionarMensagens(IEnumerable<MensagemDTO> mensagens)
         {
-            Mensagens.AddRange(mensagens);
+            foreach (var mensagem in mensagens)
+            {
+                AdicionarMensagem(mensagem);
+            }
+        }
+
+        public void AdicionarMensagens(List<ValidationFailure> mensagensDeErroValidacao)
+        {
+           foreach(var mensagemDeErroValidacao in mensagensDeErroValidacao)
+            {
+                AdicionarMensagemErro(mensagemDeErroValidacao.ErrorMessage);
+            }
         }
 
         public  void AdicionarMensagem(MensagemDTO mensagem)
         {
+            if (string.IsNullOrEmpty(mensagem.Mensagem))
+            {
+                throw new ArgumentNullException("Mensagem não foi fornecida.");
+            }
+
             Mensagens.Add(mensagem);
         }
 

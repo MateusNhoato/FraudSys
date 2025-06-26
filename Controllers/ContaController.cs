@@ -11,6 +11,10 @@ namespace FraudSys.Controllers
     {
         private readonly IContaService _contaService;
 
+        public ContaController(ServicoDeMensagens servicoDeMensagens, IContaService contaService) : base(servicoDeMensagens)
+        {
+            _contaService = contaService;
+        }
 
         [HttpGet("{cpf:string}")]
         public async Task<IActionResult> Get(string cpf)
@@ -20,7 +24,7 @@ namespace FraudSys.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(ContaDTO dto)
+        public async Task<IActionResult> Put(ContaInDTO dto)
         {
             var conta = await _contaService.GravarAsync(dto);
             return PutBase(conta);

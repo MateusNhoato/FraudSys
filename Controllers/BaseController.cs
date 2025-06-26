@@ -8,6 +8,10 @@ namespace FraudSys.Controllers
     {
         private readonly ServicoDeMensagens _mensagens;
 
+        public BaseController(ServicoDeMensagens mensagens)
+        {
+            _mensagens = mensagens;
+        }
 
         private bool TemErros => _mensagens.TemErros;
         private IReadOnlyCollection<MensagemDTO> Mensagens => _mensagens.ObterMensagens();
@@ -15,20 +19,16 @@ namespace FraudSys.Controllers
         private IActionResult NotFoundPadrao => NotFound(Mensagens);
 
 
-        private protected IActionResult GetBase<Entity>(Entity entity)
+        private protected IActionResult GetBase<Entity>(Entity entidade)
         {
 
-            if (entity == null)
+            if (entidade == null)
             {
                 return NotFoundPadrao;
             }
 
-            if (TemErros)
-            {
-                return BadRequestPadrao;
-            }
-
-            return Ok(entity);
+          
+            return RetornoPadrao(entidade);
         }
 
         private protected IActionResult GetBase<Entity>(IEnumerable<Entity> entidades)
@@ -39,57 +39,51 @@ namespace FraudSys.Controllers
                 return NotFoundPadrao;
             }
 
-            if (TemErros)
-            {
-                return BadRequestPadrao;
-            }
-
-            return Ok(entidades);
+            return RetornoPadrao(entidades);
         }
 
         private protected IActionResult PutBase<Entity>(IEnumerable<Entity> entidades)
         {
-            if (TemErros)
-            {
-                return BadRequestPadrao;
-            }
-
-            return Ok(entidades);
+            return RetornoPadrao(entidades);
         }
 
         private protected IActionResult PutBase<Entity>(Entity entidade)
         {
-            if (TemErros)
-            {
-                return BadRequestPadrao;
-            }
-
-            return Ok(entidade);
+            return RetornoPadrao(entidade);
         }
 
         private protected IActionResult DeleteBase(bool deletou)
         {
-            if (TemErros)
-            {
-                return BadRequestPadrao;
-            }
-
-            if (!deletou)
-            {
-                return NotFoundPadrao;
-            }
-
-            return Ok();
+            return RetornoComCondicao(deletou);
         }
 
         private protected IActionResult PatchBase(bool atualizou)
+        {
+            return RetornoComCondicao(atualizou);
+        }
+
+        public IActionResult RetornoPadrao<T>(T resultado)
         {
             if (TemErros)
             {
                 return BadRequestPadrao;
             }
 
-            if (!atualizou)
+            return Ok(new RequestResultDTO<T>
+            {
+                Result = resultado,
+                Mensagens = Mensagens.Select(m => m.Mensagem).ToArray()
+            });
+        }
+
+        private IActionResult RetornoComCondicao(bool condicao)
+        {
+            if (TemErros)
+            {
+                return BadRequestPadrao;
+            }
+
+            if (!condicao)
             {
                 return NotFoundPadrao;
             }
