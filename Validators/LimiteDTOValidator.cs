@@ -5,7 +5,7 @@ using FraudSys.Repositories.Interfaces;
 
 namespace FraudSys.Validators
 {
-    public class LimiteDTOValidator : AbstractValidator<LimiteDTO>
+    public class LimiteDTOValidator : AbstractValidator<LimiteInDTO>
     {
         public LimiteDTOValidator(IContaRepository contaRepository) 
         {

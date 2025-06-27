@@ -17,7 +17,7 @@ namespace FraudSys.Controllers
         }
 
 
-        [HttpGet("{cpf:string}")]
+        [HttpGet("{cpf}")]
         public async Task<IActionResult> Get(string cpf)
         {
             var limite = await _limiteService.ObterLimite(cpf);
@@ -25,7 +25,7 @@ namespace FraudSys.Controllers
         }
 
         [HttpPatch]
-        public async Task<IActionResult> AtualizarLimite(LimiteDTO dto)
+        public async Task<IActionResult> AtualizarLimite(LimiteInDTO dto)
         {
             var atualizou = await _limiteService.AtualizarLimite(dto);
             return PatchBase(atualizou);

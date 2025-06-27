@@ -15,8 +15,8 @@ namespace FraudSys.Controllers
 
         private bool TemErros => _mensagens.TemErros;
         private IReadOnlyCollection<MensagemDTO> Mensagens => _mensagens.ObterMensagens();
-        private IActionResult BadRequestPadrao => BadRequest(Mensagens);
-        private IActionResult NotFoundPadrao => NotFound(Mensagens);
+        private IActionResult BadRequestPadrao => BadRequest(Mensagens.Select(m => m.Mensagem));
+        private IActionResult NotFoundPadrao => NotFound(Mensagens.Select(m => m.Mensagem));
 
 
         private protected IActionResult GetBase<Entity>(Entity entidade)

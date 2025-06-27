@@ -19,7 +19,7 @@ namespace FraudSys.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(TransacaoInDTO dto)
         {
-            var retorno = _transacaoService.EfetuarTransacao(dto);
+            var retorno = await _transacaoService.EfetuarTransacao(dto);
 
             return RetornoPadrao(retorno);
         }

@@ -4,9 +4,9 @@ namespace FraudSys.Services
 {
     public interface ILimiteService
     {
-        Task<decimal?> ObterLimite(string cpf);
+        Task<LimiteOutDTO> ObterLimite(string cpf);
 
-        Task<bool> AtualizarLimite(LimiteDTO dto);
+        Task<bool> AtualizarLimite(LimiteInDTO dto);
 
         Task<bool> RemoverLimite(string cpf);
     }

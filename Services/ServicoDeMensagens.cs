@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using FraudSys.DTO;
 using FraudSys.Enumerators;
+using FraudSys.Resources;
 
 namespace FraudSys.Services
 {
@@ -35,7 +36,7 @@ namespace FraudSys.Services
         {
             if (string.IsNullOrEmpty(mensagem.Mensagem))
             {
-                throw new ArgumentNullException("Mensagem não foi fornecida.");
+                throw new ArgumentNullException(FraudSysResource.MensagemNaoFornecida);
             }
 
             Mensagens.Add(mensagem);

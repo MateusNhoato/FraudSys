@@ -1,8 +1,8 @@
 ﻿namespace FraudSys.DTO
 {
-    public class LimiteDTO
+    public class LimiteInDTO
     {
         public string Cpf { get; set; }
-        public decimal Valor { get; set; }
+        public decimal? Valor { get; set; }
     }
 }

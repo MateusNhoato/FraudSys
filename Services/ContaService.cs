@@ -1,6 +1,7 @@
 ﻿using FraudSys.DTO;
 using FraudSys.Models;
 using FraudSys.Repositories.Interfaces;
+using FraudSys.Resources;
 using FraudSys.Validators;
 
 namespace FraudSys.Services
@@ -12,7 +13,13 @@ namespace FraudSys.Services
         private readonly AtualizarSaldoDTOValidator _atualizarSaldoDTOValidator;
         private readonly ServicoDeMensagens _servicoDeMensagens;
 
-   
+        public ContaService(IContaRepository repository, ContaInDTOValidator contaInValidator, AtualizarSaldoDTOValidator atualizarSaldoDTOValidator, ServicoDeMensagens servicoDeMensagens)
+        {
+            _repository = repository;
+            _contaInValidator = contaInValidator;
+            _atualizarSaldoDTOValidator = atualizarSaldoDTOValidator;
+            _servicoDeMensagens = servicoDeMensagens;
+        }
 
         public async Task<bool> AtualizarSaldoAsync(AtualizarSaldoDTO atualizarSaldoDTO)
         {
@@ -84,21 +91,14 @@ namespace FraudSys.Services
 
         private Conta ObterConta(ContaInDTO contaInDTO)
         {
-            return new Conta
-            {
-                Cpf = contaInDTO.Cpf,
-                Agencia = contaInDTO.Agencia,
-                Limite = contaInDTO.LimiteTransacoesPix,
-                NumeroConta = contaInDTO.NumeroConta,
-                Saldo = contaInDTO.Saldo ?? 0
-            };
+            return new Conta(contaInDTO.Cpf, contaInDTO.NumeroConta, contaInDTO.Agencia, contaInDTO.Saldo.Value, contaInDTO.LimiteTransacoesPix);
         }
 
         private bool AtualizarSaldoConta(Conta conta, decimal valor)
         {
             if (conta.Saldo - valor < 0)
             {
-                _servicoDeMensagens.AdicionarMensagemErro("Operação inválida, não é possível negativar o saldo da conta.");
+                _servicoDeMensagens.AdicionarMensagemErro(FraudSysResource.OperacaoInvalidaNaoEhPossivelNegativarSaldo);
                 return false;
             }
 

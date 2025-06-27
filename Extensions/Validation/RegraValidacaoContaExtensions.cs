@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FraudSys.Repositories.Interfaces;
+using FraudSys.Resources;
 
 namespace FraudSys.Extensions.Validation
 {
@@ -11,7 +12,7 @@ namespace FraudSys.Extensions.Validation
         {
             return ruleBuilder
                 .MustAsync(async (cpf, ct) => await _contaRepository.ContaExiste(cpf))
-                .WithMessage("Conta informada não existe.");
+                .WithMessage(FraudSysResource.ContaInformadaNaoExiste);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using FraudSys.DTO;
+using FraudSys.Models;
 using FraudSys.Repositories.Interfaces;
+using FraudSys.Resources;
 using FraudSys.Services.Interfaces;
 using FraudSys.Validators;
 using Microsoft.Extensions.Options;
@@ -10,9 +12,9 @@ namespace FraudSys.Services
     {
         private readonly IContaRepository _contaRepository;
         private readonly ServicoDeMensagens _servicoDeMensagens;
-        private readonly TransacaoValidator _transacaoValidator;
+        private readonly TransacaoInDTOValidator _transacaoValidator;
 
-        public TransacaoService(IContaRepository contaRepository, ServicoDeMensagens servicoDeMensagens, TransacaoValidator transacaoValidator)
+        public TransacaoService(IContaRepository contaRepository, ServicoDeMensagens servicoDeMensagens, TransacaoInDTOValidator transacaoValidator)
         {
             _contaRepository = contaRepository;
             _servicoDeMensagens = servicoDeMensagens;
@@ -35,12 +37,13 @@ namespace FraudSys.Services
 
             if(contaRemetente.Saldo < dto.Valor)
             {
-                _servicoDeMensagens.AdicionarMensagemErro("Saldo insuficiente para transação.");
+                _servicoDeMensagens.AdicionarMensagemErro(FraudSysResource.SaldoInsuficienteParaTransacao);
             }
 
-            if(contaRemetente.Limite < dto.Valor)
+            if(contaRemetente.Limite.HasValue &&
+               contaRemetente.Limite < dto.Valor)
             {
-                _servicoDeMensagens.AdicionarMensagemErro("Limite da conta excedido.");
+                _servicoDeMensagens.AdicionarMensagemErro(FraudSysResource.LimiteContaExcedido);
             }
 
             if (!_servicoDeMensagens.TemErros)
@@ -48,11 +51,10 @@ namespace FraudSys.Services
                 contaRemetente.Limite -= dto.Valor;
                 contaRemetente.Saldo -= dto.Valor;
 
-                var contaDestinatario = await _contaRepository.ObterAsync(dto.CpfContaRementente);
+                var contaDestinatario = await _contaRepository.ObterAsync(dto.CpfContaDestinatario);
                 contaDestinatario.Saldo += dto.Valor;
 
-                await _contaRepository.GravarAsync(contaRemetente);
-                await _contaRepository.GravarAsync(contaDestinatario);
+                await _contaRepository.GravarAsync(new List<Conta>() { contaDestinatario, contaRemetente });
 
 
                 resultado = new TransacaoOutDTO()
@@ -60,7 +62,7 @@ namespace FraudSys.Services
                     LimiteAtual = contaRemetente.Limite
                 };
 
-                _servicoDeMensagens.AdicionarMensagemInformacao("Transação aprovada!");
+                _servicoDeMensagens.AdicionarMensagemInformacao(FraudSysResource.TransacaoAprovada);
             }
 
 

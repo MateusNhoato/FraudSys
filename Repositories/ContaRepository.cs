@@ -1,7 +1,7 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
+using FraudSys.Constantes;
 using FraudSys.Models;
 using FraudSys.Repositories.Interfaces;
-using Microsoft.Extensions.Localization;
 
 namespace FraudSys.Repositories
 {
@@ -16,13 +16,21 @@ namespace FraudSys.Repositories
 
         public async Task<Conta> ObterAsync(string cpf)
         {
-            var contas = await _context.QueryAsync<Conta>(cpf).GetRemainingAsync();
+            var contas = await _context.QueryAsync<Conta>(FraudSysConstantes.CLIENTE + cpf).GetRemainingAsync();
             return contas.FirstOrDefault();
         }
 
         public async Task GravarAsync(Conta conta)
         {
             await _context.SaveAsync(conta);
+        }
+
+        public async Task GravarAsync(IEnumerable<Conta> contas)
+        {
+           foreach(var conta in contas)
+            {
+                await GravarAsync(conta);
+            }
         }
 
         public async Task RemoverAsync(string cpf)

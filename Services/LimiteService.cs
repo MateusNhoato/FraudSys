@@ -20,7 +20,7 @@ namespace FraudSys.Services
             _servicoDeMensagens = servicoDeMensagens;
         }
 
-        public async Task<bool> AtualizarLimite(LimiteDTO dto)
+        public async Task<bool> AtualizarLimite(LimiteInDTO dto)
         {
             var validacao = await _limiteDTOValidator.ValidateAsync(dto);
 
@@ -31,13 +31,13 @@ namespace FraudSys.Services
             }
 
             var conta = await _contaRepository.ObterAsync(dto.Cpf);
-            AtualizarLimite(conta, dto.Valor);
+            AtualizarLimite(conta, dto.Valor.Value);
             await _contaRepository.GravarAsync(conta);
 
             return true;
         }
 
-        public async Task<decimal?> ObterLimite(string cpf)
+        public async Task<LimiteOutDTO> ObterLimite(string cpf)
         {
             if (! await _contaRepository.ContaExiste(cpf))
             {
@@ -46,7 +46,10 @@ namespace FraudSys.Services
 
             var conta = await _contaRepository.ObterAsync(cpf);
 
-            return conta?.Limite;
+            return new LimiteOutDTO
+            {
+                Limite = conta.Limite
+            };
         }
 
         public async Task<bool> RemoverLimite(string cpf)
@@ -57,13 +60,13 @@ namespace FraudSys.Services
             }
 
             var conta = await _contaRepository.ObterAsync(cpf);
-            AtualizarLimite(conta, 0);
+            AtualizarLimite(conta, null);
             await _contaRepository.GravarAsync(conta);
 
             return true;
         }
 
-        private void AtualizarLimite(Conta conta, decimal valor)
+        private void AtualizarLimite(Conta conta, decimal? valor)
         {
             conta.Limite = valor;
         }

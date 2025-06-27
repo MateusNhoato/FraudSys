@@ -1,4 +1,5 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
+using FraudSys.Constantes;
 
 namespace FraudSys.Models
 {
@@ -6,9 +7,9 @@ namespace FraudSys.Models
     public class Conta
     {
         [DynamoDBHashKey("pk")]
-        public string PK => "CLIENTE#" + Cpf;
+        public string Pk { get; set; }
         [DynamoDBRangeKey("sk")]
-        public string SK => "CONTA#" + NumeroConta + "-" + Agencia;
+        public string Sk { get; set; }
 
         [DynamoDBProperty]
         public string Cpf { get; set; }
@@ -21,6 +22,21 @@ namespace FraudSys.Models
         [DynamoDBProperty]
         public decimal Saldo { get; set; }
         [DynamoDBProperty]
-        public decimal Limite { get; set; }
+        public decimal? Limite { get; set; }
+
+        public Conta(string cpf, string numeroConta, string agencia, decimal saldo, decimal? limite)
+        {
+            Cpf = cpf;
+            NumeroConta = numeroConta;
+            Agencia = agencia;
+            Saldo = saldo;
+            Limite = limite;
+            Pk = FraudSysConstantes.CLIENTE + Cpf;
+            Sk = FraudSysConstantes.CONTA+ NumeroConta + FraudSysConstantes.SEPARADOR + Agencia;
+        }
+
+        public Conta()
+        {
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace FraudSys.Controllers
             _contaService = contaService;
         }
 
-        [HttpGet("{cpf:string}")]
+        [HttpGet("{cpf}")]
         public async Task<IActionResult> Get(string cpf)
         {
             var conta = await _contaService.ObterAsync(cpf);
