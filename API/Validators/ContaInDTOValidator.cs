@@ -20,7 +20,7 @@ namespace FraudSys.Validators
             RuleFor(conta => conta.NumeroConta).NotEmpty().WithMessage(FraudSysResource.NumeroContaObrigatorio)
                                                .Matches("^\\d{5,12}-\\d{1}$").WithMessage(FraudSysResource.FormatoInvalidoNumeroDeConta);
 
-            RuleFor(conta => conta.LimiteTransacoesPix).LimitePixValido().When(x => x.LimiteTransacoesPix.HasValue);
+            RuleFor(conta => conta.LimiteTransacoesPix).LimitePixValido().When(c => c.LimiteTransacoesPix.HasValue);
         }
     }
 }

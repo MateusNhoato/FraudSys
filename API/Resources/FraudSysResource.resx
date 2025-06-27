@@ -133,7 +133,7 @@
     <value>conta do remetente</value>
   </data>
   <data name="CpfEhObrigatorio" xml:space="preserve">
-    <value>CPF é obrigatório.</value>
+    <value>CPF {0} é obrigatório.</value>
   </data>
   <data name="FormatoCpfInvalido" xml:space="preserve">
     <value>Formato de CPF {0} inválido.</value>
@@ -147,8 +147,8 @@
   <data name="LimiteContaExcedido" xml:space="preserve">
     <value>Limite da conta excedido.</value>
   </data>
-  <data name="LimiteNaoPodeSerNegativo" xml:space="preserve">
-    <value>O limite de transações pix não pode ser negativo.</value>
+  <data name="LimiteDeveSerMaiorQueZero" xml:space="preserve">
+    <value>O limite de transações pix deve ser maior que zero.</value>
   </data>
   <data name="MensagemNaoFornecida" xml:space="preserve">
     <value>Mensagem não foi fornecida.</value>
@@ -158,6 +158,9 @@
   </data>
   <data name="NaoEhPossivelDepositarValoresNegativos" xml:space="preserve">
     <value>Não é possível depositar valores negativos.</value>
+  </data>
+  <data name="NaoEhPossivelDepositarValorMenorQueZero" xml:space="preserve">
+    <value>É necessário um valor maior que zero para fazer a transferência.</value>
   </data>
   <data name="NumeroContaObrigatorio" xml:space="preserve">
     <value>Número da conta é obrigatório.</value>

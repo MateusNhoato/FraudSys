@@ -9,7 +9,7 @@ namespace FraudSys.Extensions.Validation
         public static IRuleBuilderOptions<T, decimal?> LimitePixValido<T>(
       this IRuleBuilder<T, decimal?> ruleBuilder)
         {
-            return ruleBuilder.GreaterThanOrEqualTo(0).WithMessage(FraudSysResource.LimiteNaoPodeSerNegativo);
+            return ruleBuilder.GreaterThan(0).WithMessage(FraudSysResource.LimiteDeveSerMaiorQueZero);
         }
     }
 }

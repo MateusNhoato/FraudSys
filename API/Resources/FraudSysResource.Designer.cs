@@ -22,7 +22,7 @@ namespace FraudSys.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class FraudSysResource {
+    public class FraudSysResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace FraudSys.Resources {
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FraudSys.Resources.FraudSysResource", typeof(FraudSysResource).Assembly);
@@ -51,7 +51,7 @@ namespace FraudSys.Resources {
         ///   pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Agência é obrigatória..
         /// </summary>
-        internal static string AgenciaObrigatoria {
+        public static string AgenciaObrigatoria {
             get {
                 return ResourceManager.GetString("AgenciaObrigatoria", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a As contas não podem ser iguais..
         /// </summary>
-        internal static string AsContasNaoPodemSerIguais {
+        public static string AsContasNaoPodemSerIguais {
             get {
                 return ResourceManager.GetString("AsContasNaoPodemSerIguais", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a conta destinatário.
         /// </summary>
-        internal static string ContaDestinatario {
+        public static string ContaDestinatario {
             get {
                 return ResourceManager.GetString("ContaDestinatario", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Conta informada não existe..
         /// </summary>
-        internal static string ContaInformadaNaoExiste {
+        public static string ContaInformadaNaoExiste {
             get {
                 return ResourceManager.GetString("ContaInformadaNaoExiste", resourceCulture);
             }
@@ -99,16 +99,16 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a conta do remetente.
         /// </summary>
-        internal static string ContaRemetente {
+        public static string ContaRemetente {
             get {
                 return ResourceManager.GetString("ContaRemetente", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a CPF é obrigatório..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a CPF {0} é obrigatório..
         /// </summary>
-        internal static string CpfEhObrigatorio {
+        public static string CpfEhObrigatorio {
             get {
                 return ResourceManager.GetString("CpfEhObrigatorio", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Formato de CPF {0} inválido..
         /// </summary>
-        internal static string FormatoCpfInvalido {
+        public static string FormatoCpfInvalido {
             get {
                 return ResourceManager.GetString("FormatoCpfInvalido", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Formato inválido de agência. Formatos válidos: &quot;1234&quot; ou &quot;1234-5&quot;..
         /// </summary>
-        internal static string FormatoInvalidoDeAgencia {
+        public static string FormatoInvalidoDeAgencia {
             get {
                 return ResourceManager.GetString("FormatoInvalidoDeAgencia", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Formato inválido de número de conta. A conta deve ter de 5 a 12 dígitos, com dígito verificador (Ex: 123456-7, 12345-6)..
         /// </summary>
-        internal static string FormatoInvalidoNumeroDeConta {
+        public static string FormatoInvalidoNumeroDeConta {
             get {
                 return ResourceManager.GetString("FormatoInvalidoNumeroDeConta", resourceCulture);
             }
@@ -144,25 +144,25 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Limite da conta excedido..
         /// </summary>
-        internal static string LimiteContaExcedido {
+        public static string LimiteContaExcedido {
             get {
                 return ResourceManager.GetString("LimiteContaExcedido", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a O limite de transações pix não pode ser negativo..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O limite de transações pix deve ser maior que zero..
         /// </summary>
-        internal static string LimiteNaoPodeSerNegativo {
+        public static string LimiteDeveSerMaiorQueZero {
             get {
-                return ResourceManager.GetString("LimiteNaoPodeSerNegativo", resourceCulture);
+                return ResourceManager.GetString("LimiteDeveSerMaiorQueZero", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Mensagem não foi fornecida..
         /// </summary>
-        internal static string MensagemNaoFornecida {
+        public static string MensagemNaoFornecida {
             get {
                 return ResourceManager.GetString("MensagemNaoFornecida", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Não é possível cadastrar uma conta com saldo negativo..
         /// </summary>
-        internal static string NaoEhPossivelCadastrarContaComSaldoNegativo {
+        public static string NaoEhPossivelCadastrarContaComSaldoNegativo {
             get {
                 return ResourceManager.GetString("NaoEhPossivelCadastrarContaComSaldoNegativo", resourceCulture);
             }
@@ -180,16 +180,25 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Não é possível depositar valores negativos..
         /// </summary>
-        internal static string NaoEhPossivelDepositarValoresNegativos {
+        public static string NaoEhPossivelDepositarValoresNegativos {
             get {
                 return ResourceManager.GetString("NaoEhPossivelDepositarValoresNegativos", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a É necessário um valor maior que zero para fazer a transferência..
+        /// </summary>
+        public static string NaoEhPossivelDepositarValorMenorQueZero {
+            get {
+                return ResourceManager.GetString("NaoEhPossivelDepositarValorMenorQueZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Número da conta é obrigatório..
         /// </summary>
-        internal static string NumeroContaObrigatorio {
+        public static string NumeroContaObrigatorio {
             get {
                 return ResourceManager.GetString("NumeroContaObrigatorio", resourceCulture);
             }
@@ -198,7 +207,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro desconhecido..
         /// </summary>
-        internal static string OcorreuUmErroDesconhecido {
+        public static string OcorreuUmErroDesconhecido {
             get {
                 return ResourceManager.GetString("OcorreuUmErroDesconhecido", resourceCulture);
             }
@@ -207,7 +216,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Operação inválida, não é possível negativar o saldo da conta..
         /// </summary>
-        internal static string OperacaoInvalidaNaoEhPossivelNegativarSaldo {
+        public static string OperacaoInvalidaNaoEhPossivelNegativarSaldo {
             get {
                 return ResourceManager.GetString("OperacaoInvalidaNaoEhPossivelNegativarSaldo", resourceCulture);
             }
@@ -216,7 +225,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Saldo insuficiente para transação..
         /// </summary>
-        internal static string SaldoInsuficienteParaTransacao {
+        public static string SaldoInsuficienteParaTransacao {
             get {
                 return ResourceManager.GetString("SaldoInsuficienteParaTransacao", resourceCulture);
             }
@@ -225,7 +234,7 @@ namespace FraudSys.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Transação aprovada!.
         /// </summary>
-        internal static string TransacaoAprovada {
+        public static string TransacaoAprovada {
             get {
                 return ResourceManager.GetString("TransacaoAprovada", resourceCulture);
             }

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FraudSys", "FraudSys.csproj", "{F6F99BA1-60CC-422B-BBBA-B9B91A41D7F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FraudSysTest", "..\FraudSysTest\FraudSysTest.csproj", "{5FD9C722-4F51-4596-9758-01A5EC5BF782}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F6F99BA1-60CC-422B-BBBA-B9B91A41D7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6F99BA1-60CC-422B-BBBA-B9B91A41D7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6F99BA1-60CC-422B-BBBA-B9B91A41D7F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD9C722-4F51-4596-9758-01A5EC5BF782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD9C722-4F51-4596-9758-01A5EC5BF782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD9C722-4F51-4596-9758-01A5EC5BF782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD9C722-4F51-4596-9758-01A5EC5BF782}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@ namespace FraudSys.Validators
         {
             RuleFor(lim=> lim.Cpf).CpfValido(string.Empty).ContaExiste(contaRepository);
 
-            RuleFor(lim => lim.Valor).LimitePixValido();
+            RuleFor(lim => lim.Valor).LimitePixValido().When(lim => lim.Valor.HasValue);
         }
     }
 }

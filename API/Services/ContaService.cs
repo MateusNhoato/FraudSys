@@ -96,7 +96,7 @@ namespace FraudSys.Services
 
         private bool AtualizarSaldoConta(Conta conta, decimal valor)
         {
-            if (conta.Saldo - valor < 0)
+            if (OperacaoVaiNegativarAConta(conta, valor))
             {
                 _servicoDeMensagens.AdicionarMensagemErro(FraudSysResource.OperacaoInvalidaNaoEhPossivelNegativarSaldo);
                 return false;
@@ -106,6 +106,12 @@ namespace FraudSys.Services
             return true;
         }
 
+
+        private bool OperacaoVaiNegativarAConta(Conta conta, decimal valor)
+        {
+            return valor < 0 &&
+                conta.Saldo + valor < 0;
+        }
         private async Task GravarConta(Conta conta)
         {
             await _repository.GravarAsync(conta);

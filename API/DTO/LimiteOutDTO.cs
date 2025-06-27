@@ -2,6 +2,6 @@
 {
     public class LimiteOutDTO
     {
-        public Decimal? Limite { get; set; }
+        public decimal? Limite { get; set; }
     }
 }

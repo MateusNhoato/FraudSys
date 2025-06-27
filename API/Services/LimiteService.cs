@@ -31,7 +31,7 @@ namespace FraudSys.Services
             }
 
             var conta = await _contaRepository.ObterAsync(dto.Cpf);
-            AtualizarLimite(conta, dto.Valor.Value);
+            AtualizarLimite(conta, dto.Valor);
             await _contaRepository.GravarAsync(conta);
 
             return true;

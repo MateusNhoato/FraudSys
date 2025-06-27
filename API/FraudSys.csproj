@@ -24,8 +24,9 @@
   <ItemGroup>
     <EmbeddedResource Update="Resources\FraudSysResource.resx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		<Generator>ResXFileCodeGenerator</Generator>
-		<LastGenOutput>FraudSysResource.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FraudSysResource.Designer.cs</LastGenOutput>
+      <AccessModifier>Public</AccessModifier>
     </EmbeddedResource>
   </ItemGroup>
 

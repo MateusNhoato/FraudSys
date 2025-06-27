@@ -15,7 +15,7 @@ namespace FraudSys.Validators
         {
             RuleFor(tr => tr.CpfContaRementente).CpfValido(FraudSysResource.ContaRemetente).ContaExiste(_contaRepository);
             RuleFor(tr => tr.CpfContaDestinatario).CpfValido(FraudSysResource.ContaDestinatario).ContaExiste(_contaRepository);
-            RuleFor(tr => tr.Valor).GreaterThan(0).WithMessage(FraudSysResource.NaoEhPossivelCadastrarContaComSaldoNegativo);
+            RuleFor(tr => tr.Valor).GreaterThan(0).WithMessage(FraudSysResource.NaoEhPossivelDepositarValorMenorQueZero);
             RuleFor(tr => tr.CpfContaRementente).NotEqual(x => x.CpfContaDestinatario).WithMessage(FraudSysResource.AsContasNaoPodemSerIguais);
         }
     }

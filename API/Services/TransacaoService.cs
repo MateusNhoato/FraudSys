@@ -35,27 +35,22 @@ namespace FraudSys.Services
 
             var contaRemetente = await _contaRepository.ObterAsync(dto.CpfContaRementente);
 
-            if(contaRemetente.Saldo < dto.Valor)
+            if (!TemSaldoDisponivelParaTransacao(contaRemetente, dto.Valor))
             {
                 _servicoDeMensagens.AdicionarMensagemErro(FraudSysResource.SaldoInsuficienteParaTransacao);
             }
 
-            if(contaRemetente.Limite.HasValue &&
-               contaRemetente.Limite < dto.Valor)
+            if(!TemLimiteDisponivelParaTransacao(contaRemetente, dto.Valor))
             {
                 _servicoDeMensagens.AdicionarMensagemErro(FraudSysResource.LimiteContaExcedido);
             }
 
             if (!_servicoDeMensagens.TemErros)
             {
-                contaRemetente.Limite -= dto.Valor;
-                contaRemetente.Saldo -= dto.Valor;
-
                 var contaDestinatario = await _contaRepository.ObterAsync(dto.CpfContaDestinatario);
-                contaDestinatario.Saldo += dto.Valor;
 
+                AtualizarSaldos(contaRemetente, contaDestinatario, dto.Valor);
                 await _contaRepository.GravarAsync(new List<Conta>() { contaDestinatario, contaRemetente });
-
 
                 resultado = new TransacaoOutDTO()
                 {
@@ -65,9 +60,34 @@ namespace FraudSys.Services
                 _servicoDeMensagens.AdicionarMensagemInformacao(FraudSysResource.TransacaoAprovada);
             }
 
-
-
             return resultado;
+        }
+
+        private void AtualizarSaldos(Conta contaRemetente, Conta contaDestinatario, decimal valor)
+        {
+            AtualizarSaldoRemetente(contaRemetente, valor);
+            AtualizarSaldoDestinatario(contaDestinatario, valor);
+        }
+        private void AtualizarSaldoDestinatario(Conta conta, decimal valor)
+        {
+            conta.Saldo += valor;
+        }
+
+        private void AtualizarSaldoRemetente(Conta conta, decimal valor)
+        {
+            conta.Limite -= valor;
+            conta.Saldo -= valor;
+        }
+
+        private bool TemSaldoDisponivelParaTransacao(Conta conta, decimal valor)
+        {
+            return conta.Saldo >= valor;
+        }
+
+        private bool TemLimiteDisponivelParaTransacao(Conta conta, decimal valor)
+        {
+            return conta.Limite == null ||
+                   conta.Limite >= valor;
         }
     }
 }
