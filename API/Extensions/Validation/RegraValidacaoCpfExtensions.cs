@@ -8,10 +8,10 @@ namespace FraudSys.Extensions.Validation
     {
 
         public static IRuleBuilderOptions<T, string?> CpfValido<T>(
-       this IRuleBuilder<T, string?> ruleBuilder, string? nomeCampo)
+       this IRuleBuilder<T, string?> ruleBuilder, string? nomeCampo) 
         {
-            return ruleBuilder.NotEmpty().WithMessage(string.Format(FraudSysResource.CpfEhObrigatorio, !string.IsNullOrEmpty(nomeCampo) ? nomeCampo : string.Empty))
-                                         .Matches(@"^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$").WithMessage( string.Format(FraudSysResource.FormatoCpfInvalido, !string.IsNullOrEmpty(nomeCampo) ? nomeCampo : string.Empty));
+            return ruleBuilder.Matches(@"^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$").WithMessage( string.Format(FraudSysResource.FormatoCpfInvalido, !string.IsNullOrEmpty(nomeCampo) ? nomeCampo : string.Empty))
+                .NotEmpty().WithMessage(string.Format(FraudSysResource.CpfEhObrigatorio, !string.IsNullOrEmpty(nomeCampo) ? nomeCampo : string.Empty));
         }
     }
 }

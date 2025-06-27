@@ -127,7 +127,7 @@
     <value>conta destinatário</value>
   </data>
   <data name="ContaInformadaNaoExiste" xml:space="preserve">
-    <value>Conta informada não existe.</value>
+    <value>Não existe conta associada ao cpf informado.</value>
   </data>
   <data name="ContaRemetente" xml:space="preserve">
     <value>conta do remetente</value>

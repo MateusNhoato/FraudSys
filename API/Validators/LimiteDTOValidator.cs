@@ -9,7 +9,7 @@ namespace FraudSys.Validators
     {
         public LimiteDTOValidator(IContaRepository contaRepository) 
         {
-            RuleFor(lim=> lim.Cpf).CpfValido(string.Empty).ContaExiste(contaRepository);
+            RuleFor(lim=> lim.Cpf).Cascade(CascadeMode.Stop).CpfValido(string.Empty).ContaExiste(contaRepository);
 
             RuleFor(lim => lim.Valor).LimitePixValido().When(lim => lim.Valor.HasValue);
         }

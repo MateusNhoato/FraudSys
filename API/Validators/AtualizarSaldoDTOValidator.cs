@@ -10,7 +10,7 @@ namespace FraudSys.Validators
 
         public AtualizarSaldoDTOValidator(IContaRepository contaRepository)
         {
-            RuleFor(atsaldo => atsaldo.Cpf).CpfValido(string.Empty).ContaExiste(contaRepository);
+            RuleFor(atsaldo => atsaldo.Cpf).Cascade(CascadeMode.Stop).CpfValido(string.Empty).ContaExiste(contaRepository);
         }
     }
 }

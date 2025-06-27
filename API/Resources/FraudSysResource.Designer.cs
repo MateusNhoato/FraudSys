@@ -88,7 +88,7 @@ namespace FraudSys.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Conta informada não existe..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não existe conta associada ao cpf informado..
         /// </summary>
         public static string ContaInformadaNaoExiste {
             get {

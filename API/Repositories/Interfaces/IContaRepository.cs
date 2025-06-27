@@ -6,7 +6,7 @@ namespace FraudSys.Repositories.Interfaces
     {
         Task GravarAsync(Conta conta);
         Task GravarAsync(IEnumerable<Conta> contas);
-        Task RemoverAsync(string cpf);
+        Task RemoverAsync(Conta conta);
         Task<Conta> ObterAsync(string cpf);
 
         Task<bool> ContaExiste(string cpf);

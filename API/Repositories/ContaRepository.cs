@@ -33,9 +33,9 @@ namespace FraudSys.Repositories
             }
         }
 
-        public async Task RemoverAsync(string cpf)
+        public async Task RemoverAsync(Conta conta)
         {
-            await _context.DeleteAsync<Conta>(cpf);
+            await _context.DeleteAsync(conta);
         }
 
         public async Task<bool> ContaExiste(string cpf)

@@ -12,13 +12,15 @@ namespace FraudSys.Services
         private readonly ContaInDTOValidator _contaInValidator;
         private readonly AtualizarSaldoDTOValidator _atualizarSaldoDTOValidator;
         private readonly ServicoDeMensagens _servicoDeMensagens;
+        private readonly CpfDTOValidator _cpfDTOValidator;
 
-        public ContaService(IContaRepository repository, ContaInDTOValidator contaInValidator, AtualizarSaldoDTOValidator atualizarSaldoDTOValidator, ServicoDeMensagens servicoDeMensagens)
+        public ContaService(IContaRepository repository, ContaInDTOValidator contaInValidator, AtualizarSaldoDTOValidator atualizarSaldoDTOValidator, ServicoDeMensagens servicoDeMensagens, CpfDTOValidator cpfDTOValidator)
         {
             _repository = repository;
             _contaInValidator = contaInValidator;
             _atualizarSaldoDTOValidator = atualizarSaldoDTOValidator;
             _servicoDeMensagens = servicoDeMensagens;
+            _cpfDTOValidator = cpfDTOValidator;
         }
 
         public async Task<bool> AtualizarSaldoAsync(AtualizarSaldoDTO atualizarSaldoDTO)
@@ -60,6 +62,14 @@ namespace FraudSys.Services
 
         public async Task<ContaDTO?> ObterAsync(string cpf)
         {
+            var validacao = await _cpfDTOValidator.ValidateAsync(new CpfDTO() { Cpf = cpf });
+
+            if (!validacao.IsValid)
+            {
+                _servicoDeMensagens.AdicionarMensagens(validacao.Errors);
+                return null;
+            }
+
             var conta = await _repository.ObterAsync(cpf);
 
             return ObterDTO(conta);
@@ -67,13 +77,15 @@ namespace FraudSys.Services
 
         public async Task<bool> RemoverAsync(string cpf)
         {
-            var conta = await _repository.ObterAsync(cpf);
+            var validacao = await _cpfDTOValidator.ValidateAsync(new CpfDTO() { Cpf = cpf });
 
-            if (conta is null)
+            if (!validacao.IsValid)
             {
+                _servicoDeMensagens.AdicionarMensagens(validacao.Errors);
                 return false;
             }
-            await _repository.RemoverAsync(cpf);
+            var conta = await _repository.ObterAsync(cpf);
+            await _repository.RemoverAsync(conta);
 
             return true;
         }

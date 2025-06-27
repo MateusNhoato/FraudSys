@@ -38,6 +38,7 @@ builder.Services.AddScoped<AtualizarSaldoDTOValidator>();
 builder.Services.AddScoped<ContaInDTOValidator>();
 builder.Services.AddScoped<LimiteDTOValidator>();
 builder.Services.AddScoped<TransacaoInDTOValidator>();
+builder.Services.AddScoped<CpfDTOValidator>();
 
 
 

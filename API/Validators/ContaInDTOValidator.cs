@@ -10,14 +10,14 @@ namespace FraudSys.Validators
         public ContaInDTOValidator() 
         {
 
-            RuleFor(conta => conta.Cpf).CpfValido(string.Empty);
+            RuleFor(conta => conta.Cpf).Cascade(CascadeMode.Stop).CpfValido(string.Empty);
 
             RuleFor(conta => conta.Saldo).GreaterThanOrEqualTo(0).When(x => x.Saldo.HasValue).WithMessage(FraudSysResource.NaoEhPossivelCadastrarContaComSaldoNegativo);
 
-            RuleFor(conta => conta.Agencia).NotEmpty().WithMessage(FraudSysResource.AgenciaObrigatoria)
+            RuleFor(conta => conta.Agencia).Cascade(CascadeMode.Stop).NotEmpty().WithMessage(FraudSysResource.AgenciaObrigatoria)
                                            .Matches("^\\d{4}(-\\d{1})?$").WithMessage(FraudSysResource.FormatoInvalidoDeAgencia);
 
-            RuleFor(conta => conta.NumeroConta).NotEmpty().WithMessage(FraudSysResource.NumeroContaObrigatorio)
+            RuleFor(conta => conta.NumeroConta).Cascade(CascadeMode.Stop).NotEmpty().WithMessage(FraudSysResource.NumeroContaObrigatorio)
                                                .Matches("^\\d{5,12}-\\d{1}$").WithMessage(FraudSysResource.FormatoInvalidoNumeroDeConta);
 
             RuleFor(conta => conta.LimiteTransacoesPix).LimitePixValido().When(c => c.LimiteTransacoesPix.HasValue);

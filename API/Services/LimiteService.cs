@@ -11,13 +11,15 @@ namespace FraudSys.Services
 
         private readonly IContaRepository _contaRepository;
         private readonly LimiteDTOValidator _limiteDTOValidator;
+        private readonly CpfDTOValidator _cpfDTOValidator;
         private readonly ServicoDeMensagens _servicoDeMensagens;
 
-        public LimiteService(IContaRepository contaRepository, LimiteDTOValidator limiteDTOValidator, ServicoDeMensagens servicoDeMensagens)
+        public LimiteService(IContaRepository contaRepository, LimiteDTOValidator limiteDTOValidator, ServicoDeMensagens servicoDeMensagens, CpfDTOValidator cpfDTOValidator)
         {
             _contaRepository = contaRepository;
             _limiteDTOValidator = limiteDTOValidator;
             _servicoDeMensagens = servicoDeMensagens;
+            _cpfDTOValidator = cpfDTOValidator;
         }
 
         public async Task<bool> AtualizarLimite(LimiteInDTO dto)
@@ -39,8 +41,11 @@ namespace FraudSys.Services
 
         public async Task<LimiteOutDTO> ObterLimite(string cpf)
         {
-            if (! await _contaRepository.ContaExiste(cpf))
+            var validacao = await _cpfDTOValidator.ValidateAsync(new CpfDTO() { Cpf = cpf });
+
+            if (!validacao.IsValid)
             {
+                _servicoDeMensagens.AdicionarMensagens(validacao.Errors);
                 return null;
             }
 
@@ -54,10 +59,14 @@ namespace FraudSys.Services
 
         public async Task<bool> RemoverLimite(string cpf)
         {
-            if (!await _contaRepository.ContaExiste(cpf))
+            var validacao = await _cpfDTOValidator.ValidateAsync(new CpfDTO() { Cpf = cpf });
+
+            if (!validacao.IsValid)
             {
+                _servicoDeMensagens.AdicionarMensagens(validacao.Errors);
                 return false;
             }
+
 
             var conta = await _contaRepository.ObterAsync(cpf);
             AtualizarLimite(conta, null);
